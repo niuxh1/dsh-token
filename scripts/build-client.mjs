@@ -29,7 +29,10 @@ const fragments = await Promise.all(
     if (/^\s*(import|export)\s/m.test(text)) {
       throw new Error(`${file}: fragments must not use import/export (shared factory scope)`)
     }
-    return `// ── ${file} ──\n${text.trimEnd()}\n`
+    // Normalize to LF so the bundle is byte-identical on every platform:
+    // a CRLF checkout would otherwise produce a different artifact and the
+    // committed bundle would look out of sync.
+    return `// ── ${file} ──\n${text.replace(/\r\n/g, '\n').trimEnd()}\n`
   }),
 )
 
