@@ -42,11 +42,20 @@
 ### 方式一：DSH 桌面端插件页（推荐）
 
 1. 打开 DSH → **设置 → 插件**
-2. 选择安装插件，填入仓库地址：`https://github.com/niuxh1/dsh-token`
+2. 选择安装插件，填入下面任一形式：
+
+   | 形式 | 例子 |
+   |---|---|
+   | GitHub 简写 | `github:niuxh1/dsh-token` |
+   | 仓库 URL | `https://github.com/niuxh1/dsh-token` |
+   | 仓库 URL（.git） | `https://github.com/niuxh1/dsh-token.git` |
+
 3. 安装完成后按提示重启 DSH
 4. 打开 **设置 → 使用统计**
 
 插件管理器会自动把它登记到当前 profile 的 `dsh.profile.bundles` 并安装依赖。
+
+> 仓库名是 `dsh-token`，**包名是 `dsh-usage-stats`**——登记 bundle 时用的是包名。
 
 ### 方式二：命令行（web / 自建 profile）
 
@@ -106,6 +115,7 @@ curl -b "<cookie>" http://127.0.0.1:<port>/api/usage-stats/diagnostics
 ```
 
 返回 `listed / folded / failures / fallback / cached` 等字段；`failures: 0` 表示所有会话都已成功读取。
+首次打开会先显示「正在读取历史会话…（done/total）」，预热完成后自动刷新为完整数字。
 
 ## 指标口径
 
