@@ -1,0 +1,8 @@
+node_modules/
+.verify/
+.superpowers/
+.dsh-ops/
+*.log
+*.tgz
+tmp/
+.DS_Store

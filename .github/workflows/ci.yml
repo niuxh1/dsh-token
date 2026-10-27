@@ -1,0 +1,31 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22', '24']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Build browser bundle
+        run: npm run build
+      - name: Bundle must be committed in sync
+        run: git diff --exit-code -- lib/client.js
+      - name: Unit tests
+        run: npm test
+      - name: Package contents
+        run: npm pack --dry-run

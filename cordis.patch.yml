@@ -1,0 +1,7 @@
+# dsh-usage-stats bundle patch: one row, dual-face (host half = lib/index.js,
+# browser half = ./client via the `dsh.client` declaration). The row name MUST
+# equal the package name — the client-modules node half resolves
+# `require.resolve('<row-name>/package.json')` to find the package.
+- insert:
+    - id: dsh-usage-stats
+      name: 'dsh-usage-stats'

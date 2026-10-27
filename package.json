@@ -1,0 +1,62 @@
+{
+  "name": "dsh-usage-stats",
+  "version": "0.1.0",
+  "description": "DSH 使用统计：Token 用量、活跃热力图、每日趋势与模型分布（设置 → 使用统计）。Usage statistics for DeepSeek Harness.",
+  "icon": "./assets/icon.svg",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "cordis",
+    "plugin",
+    "usage",
+    "statistics",
+    "tokens"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niuxh1/dsh-token.git"
+  },
+  "homepage": "https://github.com/niuxh1/dsh-token#readme",
+  "bugs": {
+    "url": "https://github.com/niuxh1/dsh-token/issues"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "src/host",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE",
+    "assets/icon.svg"
+  ],
+  "engines": {
+    "node": ">=22.15",
+    "dsh": ">=0.2.0-rc.2 <0.3.0-0"
+  },
+  "scripts": {
+    "build": "node scripts/build-client.mjs",
+    "test": "node --test test/*.test.mjs",
+    "check": "npm run build && npm test && npm pack --dry-run"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ],
+      "platform": "web"
+    }
+  }
+}

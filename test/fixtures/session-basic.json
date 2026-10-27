@@ -1,0 +1,134 @@
+{
+  "_comment": "Hand-built fixture for foldSession: 1 header + 12 raw events spanning two local calendar days (2026-10-26 / 2026-10-27 in Asia/Shanghai). Timestamps are absolute epoch ms so the shape matches a real session log; tests derive expected day keys from the local timezone instead of hard-coding them.",
+  "header": {
+    "version": 4,
+    "id": "session-fixture-basic",
+    "createdAt": 1792979999000,
+    "cwd": "C:\\workspaces\\demo-app",
+    "isSeeded": false,
+    "delegationDepth": 0,
+    "agentPreset": "standard"
+  },
+  "inheritedEventCount": 0,
+  "events": [
+    {
+      "type": "user/message",
+      "seq": 0,
+      "time": 1792980000000,
+      "data": {
+        "role": "user",
+        "id": "msg-user-1",
+        "content": [{ "type": "text", "text": "统计一下我的 token 用量" }],
+        "source": { "kind": "user" }
+      },
+      "surfaceOp": "append"
+    },
+    {
+      "type": "turn/start",
+      "seq": 1,
+      "time": 1792980001000,
+      "data": { "turn": 1 }
+    },
+    {
+      "type": "step/start",
+      "seq": 2,
+      "time": 1792980001100,
+      "data": { "turn": 1, "step": 1 }
+    },
+    {
+      "type": "assistant/message",
+      "seq": 3,
+      "time": 1792980002000,
+      "data": {
+        "turn": 1,
+        "step": 1,
+        "message": {
+          "role": "assistant",
+          "id": "msg-assistant-1",
+          "content": [{ "type": "text", "text": "我来看看。" }],
+          "source": { "kind": "model", "provider": "wb-proxy", "model": "deepseek-v4.1-flash" }
+        },
+        "usage": {
+          "inputTokens": 100,
+          "outputTokens": 50,
+          "cacheReadTokens": 1000,
+          "totalTokens": 1150
+        }
+      },
+      "surfaceOp": "append"
+    },
+    {
+      "type": "tool/call",
+      "seq": 4,
+      "time": 1792980003000,
+      "data": { "turn": 1, "step": 1, "callId": "call-1", "name": "read", "arguments": "{}" }
+    },
+    {
+      "type": "tool/result",
+      "seq": 5,
+      "time": 1792980003100,
+      "data": { "turn": 1, "step": 1, "callId": "call-1", "ok": true }
+    },
+    {
+      "type": "step/end",
+      "seq": 6,
+      "time": 1792980003200,
+      "data": { "turn": 1, "step": 1 }
+    },
+    {
+      "type": "session/title",
+      "seq": 7,
+      "time": 1792980003300,
+      "data": {
+        "title": "示例会话",
+        "messageSeqs": [0],
+        "source": { "kind": "fallback" }
+      }
+    },
+    {
+      "type": "turn/end",
+      "seq": 8,
+      "time": 1792980006000,
+      "data": { "turn": 1, "reason": { "kind": "completed" } }
+    },
+    {
+      "type": "assistant/message",
+      "seq": 9,
+      "time": 1793062800000,
+      "data": {
+        "turn": 2,
+        "step": 1,
+        "message": {
+          "role": "assistant",
+          "id": "msg-assistant-2",
+          "content": [{ "type": "text", "text": "第二天继续。" }],
+          "source": { "kind": "model", "provider": "wb-proxy", "model": "deepseek-v4.1-pro" }
+        },
+        "usage": {
+          "inputTokens": 200,
+          "outputTokens": 100,
+          "totalTokens": 300
+        }
+      },
+      "surfaceOp": "append"
+    },
+    {
+      "type": "user/message",
+      "seq": 10,
+      "time": 1793062801000,
+      "data": {
+        "role": "user",
+        "id": "msg-time-context-1",
+        "content": [{ "type": "text", "text": "Time sampled while preparing turn 2" }],
+        "source": { "kind": "time-context" }
+      },
+      "surfaceOp": "append"
+    },
+    {
+      "type": "turn/end",
+      "seq": 11,
+      "time": 1793062802000,
+      "data": { "turn": 9, "reason": { "kind": "aborted" } }
+    }
+  ]
+}
